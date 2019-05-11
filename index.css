@@ -9,13 +9,20 @@ body, html{
 
 #container{
     margin: auto;
-    width: 500px;
-    padding-top: 120px;
+    width: 400px;
+    padding-top: 20px; 
+    text-align: center;
+}
+
+#header{
+    font-size: 50px;
+    padding: 10px;
+    font-weight: 600;
 }
 
 #board{
-    width:500px;
-    height: 500px;
+    width:400px;
+    height: 400px;
     background-color: #bbada0;
     box-sizing: border-box;
     border-radius: 5px; 
@@ -36,11 +43,10 @@ body, html{
     margin: 7px;
     border-radius: 5px;
     text-align: center;
-    font-size:40px;
-    padding-top:32px;
-    padding-bottom:32px;
+    font-size:32px;
+    padding-top:25.6px;
+    padding-bottom:25.6px;
     font-weight: bold;
-    display: table-cell; vertical-align: middle;
 }
 
 @media (max-width: 600px){
@@ -59,4 +65,34 @@ body, html{
         padding-top: 18px;
         padding-bottom: 18px;
     }
+}
+
+.score{
+    display: inline-block;
+    background-color: rgba(100, 85, 68, 0.521);
+    border-radius: 20px;
+    min-width: 100px;
+    padding: 5px;
+    margin: 10px;
+    font-size: 20px;
+}
+
+.scoreTitle{
+    color: rgba(0, 0, 0, 0.575);
+    font-size: 15px;
+}
+
+#restart{
+    margin:10px;
+    min-width: 150px;
+    background-color: green;
+    font-size: 20px;
+    border: 0;
+    border-radius: 20px;
+    color: white;
+    padding: 10px;
+}
+
+#restart:focus{
+    outline: none;
 }
