@@ -55,6 +55,8 @@ body, html{
     }
     #boardCol{
         margin:4px;
-        font-size: 50.4px;
+        font-size: 22.4px;
+        padding-top: 18px;
+        padding-bottom: 18px;
     }
 }
