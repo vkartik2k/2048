@@ -1,0 +1,52 @@
+body, html{
+    margin:0px;
+    height: 100%;
+    width: 100%;
+    background-color: #faf8ef;
+}
+
+#container{
+    height: 100%;
+    margin: auto;
+    width: 500px;
+}
+
+#board{
+    width:500px;
+    height: 500px;
+    background-color: #bbada0;
+    box-sizing: border-box;
+    border-radius: 5px; 
+    margin-top:100px;
+    padding:7px;
+    display: flex;
+    flex-direction : column;
+}
+
+#boardRow{
+    display: flex;
+    width: 100%;
+    flex-grow: 1;
+}
+#boardCol{
+    background-color: rgba(238, 228, 218, 0.35);
+    width: 100%;
+    margin: 7px;
+    border-radius: 5px;
+}
+
+@media (max-width: 600px){
+    #container{
+        height: 100%;
+        margin: auto;
+        width: 250px;
+    }
+    #board{
+        width: 250px;
+        height: 250px;
+        padding: 4px;
+    }
+    #boardCol{
+        margin:4px;
+    }
+}
