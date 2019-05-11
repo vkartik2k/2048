@@ -10,7 +10,6 @@ body, html{
 #container{
     margin: auto;
     width: 500px;
-    background-color: aqua;
     padding-top: 120px;
 }
 
@@ -32,10 +31,16 @@ body, html{
 }
 #boardCol{
     background-color: rgba(238, 228, 218, 0.35);
+    color: rgba(0, 0, 0, 0.74);
     width: 100%;
     margin: 7px;
     border-radius: 5px;
     text-align: center;
+    font-size:40px;
+    padding-top:32px;
+    padding-bottom:32px;
+    font-weight: bold;
+    display: table-cell; vertical-align: middle;
 }
 
 @media (max-width: 600px){
@@ -50,5 +55,6 @@ body, html{
     }
     #boardCol{
         margin:4px;
+        font-size: 50.4px;
     }
 }
