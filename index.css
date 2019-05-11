@@ -31,41 +31,24 @@ body, html{
     flex-direction : column;
 }
 
-#boardRow{
+.boardRow{
     display: flex;
     width: 100%;
     height: 100%;
 }
-#boardCol{
+.boardCol{
     background-color: rgba(238, 228, 218, 0.35);
     color: rgba(0, 0, 0, 0.74);
     width: 100%;
     margin: 7px;
     border-radius: 5px;
     text-align: center;
-    font-size:32px;
-    padding-top:25.6px;
-    padding-bottom:25.6px;
+    font-size:30px;
+    padding-top:24px;
+    padding-bottom:24px;
     font-weight: bold;
 }
 
-@media (max-width: 600px){
-    #container{
-        margin: auto;
-        width: 280px;
-    }
-    #board{
-        width: 280px;
-        height: 280px;
-        padding: 4px;
-    }
-    #boardCol{
-        margin:4px;
-        font-size: 22.4px;
-        padding-top: 18px;
-        padding-bottom: 18px;
-    }
-}
 
 .score{
     display: inline-block;
@@ -95,4 +78,63 @@ body, html{
 
 #restart:focus{
     outline: none;
+}
+
+
+@media (max-width: 600px){
+    #container{
+        margin: auto;
+        width: 280px;
+    }
+    #board{
+        width: 280px;
+        height: 280px;
+        padding: 4px;
+        margin-top:50px;
+        margin-bottom: 50px; 
+    }
+    .boardCol{
+        margin:4px;
+        font-size: 22.4px;
+        padding-top: 17px;
+        padding-bottom: 17px;
+    }
+    .score{
+        margin-top:30px;
+        margin-bottom:30px;
+    }
+}
+
+.value2{
+    background-color: aqua;
+}
+.value4{
+    background-color: hotpink;
+}
+.value8{
+    background-color: lawngreen;
+}
+.value16{
+    background-color: olive;
+}
+.value32{
+    background-color: orange;
+}
+.value64{
+    background-color: firebrick;
+}
+.value128{
+    background-color: sienna;
+}
+.value256{
+    background-color: slateblue;
+}
+.value512{
+    background-color: fuchsia;
+}
+.value1024{
+    background-color: tomato;
+}
+.value22048{
+    background-color: teal;
 }
