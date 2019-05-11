@@ -33,17 +33,19 @@ body, html{
     width: 100%;
     margin: 7px;
     border-radius: 5px;
+    text-align: center;
+    flex-grow: 1;
 }
 
 @media (max-width: 600px){
     #container{
         height: 100%;
         margin: auto;
-        width: 250px;
+        width: 280px;
     }
     #board{
-        width: 250px;
-        height: 250px;
+        width: 280px;
+        height: 280px;
         padding: 4px;
     }
     #boardCol{
