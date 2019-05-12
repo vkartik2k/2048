@@ -5,8 +5,6 @@ body, html{
     background-color: #faf8ef;
     padding: 0px;
 }
-
-
 #container{
     margin: auto;
     width: 400px;
@@ -47,6 +45,7 @@ body, html{
     padding-top:24px;
     padding-bottom:24px;
     font-weight: bold;
+    box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, 0.274), 0 1.5px 5px 0 rgba(0, 0, 0, 0.233);
 }
 
 
@@ -58,6 +57,7 @@ body, html{
     padding: 5px;
     margin: 10px;
     font-size: 20px;
+    box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, 0.2), 0 1.5px 5px 0 rgba(0, 0, 0, 0.19);
 }
 
 .scoreTitle{
@@ -109,32 +109,49 @@ body, html{
     background-color: honeydew;
 }
 .value4{
-    background-color: hotpink;
+    background-color: hsl(146, 64%, 42%);
+    animation-duration: 3s;
+    animation-name: slidein;
 }
 .value8{
-    background-color: lawngreen;
+    background-color: rgba(126, 252, 0, 0.808);
 }
 .value16{
-    background-color: olive;
+    background-color: rgba(52, 152, 219, 0.801);
 }
 .value32{
-    background-color: orange;
+    background-color: rgba(255, 166, 0, 0.801);
 }
 .value64{
-    background-color: firebrick;
+    background-color: rgba(48, 48, 48, 0.808);
 }
 .value128{
-    background-color: sienna;
+    background-color: rgba(83, 224, 189, 0.801);
 }
 .value256{
-    background-color: slateblue;
+    background-color: rgba(18, 136, 165, 0.808);
 }
 .value512{
-    background-color: fuchsia;
+    background-color: rgba(244, 199, 36, 0.795);
 }
 .value1024{
-    background-color: tomato;
+    background-color: rgba(255, 99, 71, 0.808);
 }
-.value22048{
-    background-color: teal;
+.value2048{
+    background-color: rgba(0, 128, 128, 0.808);
+}
+
+
+@keyframes slidein {
+    0% {
+        background-color: #26ae61d5;
+    }
+  
+    50% {
+        background-color: #26ae61;
+        
+    }
+    100% {
+        background-color: #26ae61d5;
+    }
 }
