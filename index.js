@@ -85,7 +85,7 @@ function start(){
                     }
                     
                 }
-            }   
+            } 
         }
         else if (e.keyCode == '40') {
             // down arrow
@@ -241,6 +241,220 @@ function start(){
         board[vacentCells[Math.floor(Math.random() * n)]] = 2;
         reload()
     };
+    document.addEventListener('touchstart', handleTouchStart, false);        
+    document.addEventListener('touchmove', handleTouchMove, false);
+
+    var xDown = null;                                                        
+    var yDown = null;
+
+    function getTouches(evt) {
+    return evt.touches ||             // browser API
+            evt.originalEvent.touches; // jQuery
+    }                                                     
+
+    function handleTouchStart(evt) {
+        const firstTouch = getTouches(evt)[0];                                      
+        xDown = firstTouch.clientX;                                      
+        yDown = firstTouch.clientY;                                      
+    };                                                
+
+    function handleTouchMove(evt) {
+        if ( ! xDown || ! yDown ) {
+            return;
+        }
+
+        var xUp = evt.touches[0].clientX;                                    
+        var yUp = evt.touches[0].clientY;
+
+        var xDiff = xDown - xUp;
+        var yDiff = yDown - yUp;
+
+        if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
+            if ( xDiff > 0 ) {
+                /* left swipe */ 
+                for(let p =0;p<4;p++){
+                    if(board[0+p*4]===board[1+p*4]){
+                        board[0+p*4] += board[1+p*4]
+                        board[1+p*4] = board[2+p*4]
+                        board[2+p*4] = board[3+p*4]
+                        board[3+p*4] = 0
+                    }
+                    if(board[1+p*4]===board[2+p*4]){
+                        board[1+p*4] += board[2+p*4]
+                        board[2+p*4] = board[3+p*4]
+                        board[3+p*4] = 0
+                    }
+                    if(board[2+p*4]===board[3+p*4]){
+                        board[2+p*4] += board[3+p*4]
+                        board[3+p*4] = 0
+                    }
+                    if(board[2+p*4] ==0){
+                        board[2+p*4] = board[3+p*4]
+                        board[3+p*4] = 0
+                    }
+                    if(board[1+p*4]==0){
+                        board[1+p*4] = board[2+p*4]
+                        board[2+p*4] = board[3+p*4]
+                        board[3+p*4] = 0
+                    }
+                    if(board[0+p*4]==0){
+                        board[0+p*4] = board[1+p*4]
+                        board[1+p*4] = board[2+p*4]
+                        board[2+p*4] = board[3+p*4]
+                        board[3+p*4] = 0
+                    }
+                    if(board[1+p*4]==0){
+                        board[1+p*4] = board[2+p*4]
+                        board[2+p*4] = board[3+p*4]
+                        board[3+p*4] = 0
+                    }
+                    if(board[2+p*4] ==0){
+                        board[2+p*4] = board[3+p*4]
+                        board[3+p*4] = 0
+                    }
+                    
+                }
+            } else {
+                /* right swipe */
+                for(let p =0;p<4;p++){
+                    if(board[3+p*4]===board[2+p*4]){
+                        board[3+p*4] += board[2+p*4]
+                        board[2+p*4] = board[1+p*4]
+                        board[1+p*4] = board[0+p*4]
+                        board[0+p*4] = 0
+                    }
+                    if(board[2+p*4]===board[1+p*4]){
+                        board[2+p*4] += board[1+p*4]
+                        board[1+p*4] = board[0+p*4]
+                        board[0+p*4] = 0
+                    }
+                    if(board[1+p*4]===board[0+p*4]){
+                        board[1+p*4] += board[0+p*4]
+                        board[0+p*4] = 0
+                    }
+                    if(board[1+p*4] ==0){
+                        board[1+p*4] = board[0+p*4]
+                        board[0+p*4] = 0
+                    }
+                    if(board[2+p*4]==0){
+                        board[2+p*4] = board[1+p*4]
+                        board[1+p*4] = board[0+p*4]
+                        board[0+p*4] = 0
+                    }
+                    if(board[3+p*4]==0){
+                        board[3+p*4] = board[2+p*4]
+                        board[2+p*4] = board[1+p*4]
+                        board[1+p*4] = board[0+p*4]
+                        board[0+p*4] = 0
+                    }
+                    if(board[2+p*4]==0){
+                        board[2+p*4] = board[1+p*4]
+                        board[1+p*4] = board[0+p*4]
+                        board[0+p*4] = 0
+                    }
+                    if(board[1+p*4] ==0){
+                        board[1+p*4] = board[0+p*4]
+                        board[0+p*4] = 0
+                    }
+                    
+                }
+            }                       
+        } else {
+            if ( yDiff > 0 ) {
+                for(let r= 0;r<1;r++){
+                    for(let p =0;p<4;p++){
+                        if(board[0+p]===board[4+p]){
+                            board[0+p] += board[4+p]
+                            board[4+p] = board[8+p]
+                            board[8+p] = board[12+p]
+                            board[12+p] = 0
+                        }
+                        if(board[4+p]===board[8+p]){
+                            board[4+p] += board[8+p]
+                            board[8+p] = board[12+p]
+                            board[12+p] = 0
+                        }
+                        if(board[8+p]===board[12+p]){
+                            board[8+p] += board[12+p]
+                            board[12+p] = 0
+                        }
+                        if(board[8+p] ==0){
+                            board[8+p] = board[12+p]
+                            board[12+p] = 0
+                        }
+                        if(board[4+p]==0){
+                            board[4+p] = board[8+p]
+                            board[8+p] = board[12+p]
+                            board[12+p] = 0
+                        }
+                        if(board[0+p]==0){
+                            board[0+p] = board[4+p]
+                            board[4+p] = board[8+p]
+                            board[8+p] = board[12+p]
+                            board[12+p] = 0
+                        }
+                        if(board[4+p]==0){
+                            board[4+p] = board[8+p]
+                            board[8+p] = board[12+p]
+                            board[12+p] = 0
+                        }
+                        if(board[8+p] ==0){
+                            board[8+p] = board[12+p]
+                            board[12+p] = 0
+                        }
+                        
+                    }
+                } 
+            } else { 
+                /* down swipe */
+                for(let p =0;p<4;p++){
+                    if(board[12+p]===board[8+p]){
+                        board[12+p] += board[8+p]
+                        board[8+p] = board[4+p]
+                        board[4+p] = board[0+p]
+                        board[0+p] = 0
+                    }
+                    if(board[8+p]===board[4+p]){
+                        board[8+p] += board[4+p]
+                        board[4+p] = board[0+p]
+                        board[0+p] = 0
+                    }
+                    if(board[4+p]===board[0+p]){
+                        board[4+p] += board[0+p]
+                        board[0+p] = 0
+                    }
+                    if(board[4+p] ==0){
+                        board[4+p] = board[0+p]
+                        board[0+p] = 0
+                    }
+                    if(board[8+p]==0){
+                        board[8+p] = board[4+p]
+                        board[4+p] = board[0+p]
+                        board[0+p] = 0
+                    }
+                    if(board[12+p]==0){
+                        board[12+p] = board[8+p]
+                        board[8+p] = board[4+p]
+                        board[4+p] = board[0+p]
+                        board[0+p] = 0
+                    }
+                    if(board[8+p]==0){
+                        board[8+p] = board[4+p]
+                        board[4+p] = board[0+p]
+                        board[0+p] = 0
+                    }
+                    if(board[4+p] ==0){
+                        board[4+p] = board[0+p]
+                        board[0+p] = 0
+                    }
+                    
+                }
+            }                                                                 
+        }
+        /* reset values */
+        xDown = null;
+        yDown = null;                                             
+    }
 
 }
 
