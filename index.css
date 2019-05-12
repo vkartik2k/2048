@@ -1,39 +1,21 @@
 body, html{
-    margin:0px;
     height: 100%;
     width: 100%;
+    margin:0px;
     background-color: #faf8ef;
-    padding: 0px;
-}
-#container{
-    margin: auto;
-    width: 400px;
-    padding-top: 20px; 
-    text-align: center;
 }
 
-#header{
-    font-size: 50px;
-    padding: 10px;
-    font-weight: 600;
-}
-
-#board{
-    width:400px;
-    height: 400px;
-    background-color: #bbada0;
-    box-sizing: border-box;
-    border-radius: 5px; 
-    padding:7px;
-    display: flex;
-    flex-direction : column;
-}
+/* ----------------------------------------------------- */
+/*                 OVERLAY FOR GAME OVER                 */
+/* ----------------------------------------------------- */
 
 #overlay{
     position: absolute;
     display: none;
     width: 100%;
     height: 100%;
+    padding-top: 200px;
+    padding-bottom: 20px;
     top: 0;
     left: 0;
     right: 0;
@@ -41,43 +23,75 @@ body, html{
     background-color: rgba(0, 0, 0, 0.726);
     z-index: 2;
     cursor: pointer;
-    padding-top: 200px;
     font-size: 40px;
     color: white;
     font-weight: 500;
-    padding-bottom: 20px;
 }
+
 #gameOverNotify{
     font-size: 18px;
 }
+
+/* ----------------------------------------------------- */
+/*                     MAIN GAME BODY                    */
+/* ----------------------------------------------------- */
+
+#container{
+    width: 400px;
+    margin: auto;
+    padding-top: 20px; 
+    text-align: center;
+}
+
+#header{
+    padding: 10px;
+    font-size: 50px;
+    font-weight: 600;
+}
+
+#board{
+    display: flex;
+    flex-direction : column;
+    box-sizing: border-box;
+    width:400px;
+    height: 400px;
+    padding:7px;
+    background-color: #bbada0;
+    border-radius: 5px;
+}
+
 .boardRow{
     display: flex;
     width: 100%;
     height: 100%;
 }
+
 .boardCol{
-    background-color: rgba(238, 228, 218, 0.35);
-    color: rgba(0, 0, 0, 0.74);
     width: 100%;
     margin: 7px;
-    border-radius: 5px;
-    text-align: center;
-    font-size:30px;
     padding-top:24px;
     padding-bottom:24px;
+    color: rgba(0, 0, 0, 0.74);
+    background-color: rgba(238, 228, 218, 0.35);
+    font-size:30px;
     font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
     box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, 0.274), 0 1.5px 5px 0 rgba(0, 0, 0, 0.233);
 }
 
+/* ----------------------------------------------------- */
+/*                      SCORE BOARD                      */
+/* ----------------------------------------------------- */
 
 .score{
     display: inline-block;
-    background-color: rgba(100, 85, 68, 0.521);
-    border-radius: 20px;
     min-width: 100px;
     padding: 5px;
     margin: 10px;
+    background-color: rgba(100, 85, 68, 0.521);
     font-size: 20px;
+    border-radius: 20px;
     box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, 0.2), 0 1.5px 5px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -86,45 +100,28 @@ body, html{
     font-size: 15px;
 }
 
+/* ----------------------------------------------------- */
+/*                     RESTART BUTTON                    */
+/* ----------------------------------------------------- */
+
 #restart{
-    margin:10px;
     min-width: 150px;
+    margin:10px;
+    padding: 10px;
+    color: white;
     background-color: green;
     font-size: 20px;
     border: 0;
     border-radius: 20px;
-    color: white;
-    padding: 10px;
 }
 
 #restart:focus{
     outline: none;
 }
 
-
-@media (max-width: 600px){
-    #container{
-        margin: auto;
-        width: 280px;
-    }
-    #board{
-        width: 280px;
-        height: 280px;
-        padding: 4px;
-        margin-top:20px;
-        margin-bottom: 10px; 
-    }
-    .boardCol{
-        margin:4px;
-        font-size: 22.4px;
-        padding-top: 17px;
-        padding-bottom: 17px;
-    }
-    .score{
-        margin-top:10px;
-        margin-bottom:10px;
-    }
-}
+/* ----------------------------------------------------- */
+/*           COLOURS FOR BOXES OF DIFF. VALUES           */
+/* ----------------------------------------------------- */
 
 .value2{
     background-color: honeydew;
@@ -132,8 +129,6 @@ body, html{
 }
 .value4{
     background-color: hsl(146, 64%, 42%);
-    /* animation-duration: 3s;
-    animation-name: slidein; */
     transition: 0.2s;
 }
 .value8{
@@ -173,17 +168,30 @@ body, html{
     transition: 0.2s;
 }
 
+/* ----------------------------------------------------- */
+/*             MEDIA QUERY FOR MOBILE DEVICE             */
+/* ----------------------------------------------------- */
 
-@keyframes slidein {
-    0% {
-        background-color: #26ae61d5;
+@media (max-width: 600px){
+    #container{
+        margin: auto;
+        width: 280px;
     }
-  
-    50% {
-        background-color: #26ae61;
-        
+    #board{
+        width: 280px;
+        height: 280px;
+        padding: 4px;
+        margin-top:20px;
+        margin-bottom: 10px; 
     }
-    100% {
-        background-color: #26ae61d5;
+    .boardCol{
+        margin:4px;
+        font-size: 22.4px;
+        padding-top: 17px;
+        padding-bottom: 17px;
+    }
+    .score{
+        margin-top:10px;
+        margin-bottom:10px;
     }
 }
