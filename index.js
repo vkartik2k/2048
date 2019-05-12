@@ -59,6 +59,15 @@ function start(){
                         board[8+p] += board[12+p]
                         board[12+p] = 0
                     }
+                    if(board[8+p] ==0){
+                        board[8+p] = board[12+p]
+                        board[12+p] = 0
+                    }
+                    if(board[4+p]==0){
+                        board[4+p] = board[8+p]
+                        board[8+p] = board[12+p]
+                        board[12+p] = 0
+                    }
                     if(board[0+p]==0){
                         board[0+p] = board[4+p]
                         board[4+p] = board[8+p]
@@ -97,6 +106,15 @@ function start(){
                         board[4+p] += board[0+p]
                         board[0+p] = 0
                     }
+                    if(board[4+p] ==0){
+                        board[4+p] = board[0+p]
+                        board[0+p] = 0
+                    }
+                    if(board[8+p]==0){
+                        board[8+p] = board[4+p]
+                        board[4+p] = board[0+p]
+                        board[0+p] = 0
+                    }
                     if(board[12+p]==0){
                         board[12+p] = board[8+p]
                         board[8+p] = board[4+p]
@@ -133,6 +151,15 @@ function start(){
                     }
                     if(board[2+p*4]===board[3+p*4]){
                         board[2+p*4] += board[3+p*4]
+                        board[3+p*4] = 0
+                    }
+                    if(board[2+p*4] ==0){
+                        board[2+p*4] = board[3+p*4]
+                        board[3+p*4] = 0
+                    }
+                    if(board[1+p*4]==0){
+                        board[1+p*4] = board[2+p*4]
+                        board[2+p*4] = board[3+p*4]
                         board[3+p*4] = 0
                     }
                     if(board[0+p*4]==0){
@@ -174,6 +201,15 @@ function start(){
                         board[1+p*4] += board[0+p*4]
                         board[0+p*4] = 0
                     }
+                    if(board[1+p*4] ==0){
+                        board[1+p*4] = board[0+p*4]
+                        board[0+p*4] = 0
+                    }
+                    if(board[2+p*4]==0){
+                        board[2+p*4] = board[1+p*4]
+                        board[1+p*4] = board[0+p*4]
+                        board[0+p*4] = 0
+                    }
                     if(board[3+p*4]==0){
                         board[3+p*4] = board[2+p*4]
                         board[2+p*4] = board[1+p*4]
@@ -202,7 +238,7 @@ function start(){
                 vacentCells.push(p)
             }
         }
-        //board[vacentCells[Math.floor(Math.random() * n)]] = 2;
+        board[vacentCells[Math.floor(Math.random() * n)]] = 2;
         reload()
     };
 
