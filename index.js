@@ -453,7 +453,17 @@ function start(){
         }
         /* reset values */
         xDown = null;
-        yDown = null;                                             
+        yDown = null;   
+        let n =0;
+        let vacentCells = []
+        for(let p=0;p<16;p++){
+            if(board[p]==0){
+                n++;
+                vacentCells.push(p)
+            }
+        }
+        board[vacentCells[Math.floor(Math.random() * n)]] = 2;
+        reload()                                          
     }
 
 }
