@@ -1,52 +1,213 @@
-var game = {
-    board: [
-        0,0,0,0,
-        0,0,0,0,
-        0,0,0,0,
-        0,0,0,0
-    ],
-    displayBoard:[],
-    currentScore: 0,
-    highScore: 0,
-    init : function() {
-        for(let i=0;i<16;i++){
-            this.board[i] = 0
-        }
-        let random1 = Math.floor(Math.random() * 16);
-        let random2 = Math.floor(Math.random() * 16);
-        this.board[random1] = 2;
-        if(random1===random2){
-            this.board[random1-1] = 2;
-        }
-        else{
-            this.board[random2] = 2;
-        }
-        for(let i=0;i<16;i++){
-            this.displayBoard.push(document.getElementById("boardElement"+i))
-        }
-    },
-    reload : function(){
-        for(let i=0;i<16;i++){
-            if(this.board[i] != 0){
-                this.displayBoard[i].innerHTML = this.board[i]
-                this.displayBoard[i].className += " value"+this.board[i]+" ";
-            }
-            else{
-                this.displayBoard[i].innerHTML = ""
-                this.displayBoard[i].className = "boardCol";
-            }
-        }
-    },
-    start:function(){
-        this.init();
-        this.reload();
-
+let board= [
+    0,0,0,0,
+    0,0,0,0,
+    0,0,0,0,
+    0,0,0,0
+]
+let displayBoard= []
+let currentScore= 0
+let highScore= 0
+function init() {
+    for(let i=0;i<16;i++){
+        board[i] = 0
+    }
+    let random1 = Math.floor(Math.random() * 16);
+    let random2 = Math.floor(Math.random() * 16);
+    board[random1] = 2;
+    if(random1===random2){
+        board[random1-1] = 2;
+    }
+    else{
+        board[random2] = 2;
+    }
+    for(let i=0;i<16;i++){
+        displayBoard.push(document.getElementById("boardElement"+i))
     }
 }
-
-function start() {
-    game.start()
+function reload(){
+    for(let i=0;i<16;i++){
+        if(board[i] != 0){
+            displayBoard[i].innerHTML = board[i]
+            displayBoard[i].className = "boardCol value"+board[i];
+        }
+        else{
+            displayBoard[i].innerHTML = ""
+            displayBoard[i].className = "boardCol";
+        }
+    }
 }
+function start(){
+    init();
+    reload();
+    document.onkeydown = function(e){
+        if (e.keyCode == '38') {
+            // up arrow
+            for(let r= 0;r<1;r++){
+                for(let p =0;p<4;p++){
+                    if(board[0+p]===board[4+p]){
+                        board[0+p] += board[4+p]
+                        board[4+p] = board[8+p]
+                        board[8+p] = board[12+p]
+                        board[12+p] = 0
+                    }
+                    if(board[4+p]===board[8+p]){
+                        board[4+p] += board[8+p]
+                        board[8+p] = board[12+p]
+                        board[12+p] = 0
+                    }
+                    if(board[8+p]===board[12+p]){
+                        board[8+p] += board[12+p]
+                        board[12+p] = 0
+                    }
+                    if(board[0+p]==0){
+                        board[0+p] = board[4+p]
+                        board[4+p] = board[8+p]
+                        board[8+p] = board[12+p]
+                        board[12+p] = 0
+                    }
+                    if(board[4+p]==0){
+                        board[4+p] = board[8+p]
+                        board[8+p] = board[12+p]
+                        board[12+p] = 0
+                    }
+                    if(board[8+p] ==0){
+                        board[8+p] = board[12+p]
+                        board[12+p] = 0
+                    }
+                    
+                }
+            }   
+        }
+        else if (e.keyCode == '40') {
+            // down arrow
+            for(let r= 0;r<1;r++){
+                for(let p =0;p<4;p++){
+                    if(board[12+p]===board[8+p]){
+                        board[12+p] += board[8+p]
+                        board[8+p] = board[4+p]
+                        board[4+p] = board[0+p]
+                        board[0+p] = 0
+                    }
+                    if(board[8+p]===board[4+p]){
+                        board[8+p] += board[4+p]
+                        board[4+p] = board[0+p]
+                        board[0+p] = 0
+                    }
+                    if(board[4+p]===board[0+p]){
+                        board[4+p] += board[0+p]
+                        board[0+p] = 0
+                    }
+                    if(board[12+p]==0){
+                        board[12+p] = board[8+p]
+                        board[8+p] = board[4+p]
+                        board[4+p] = board[0+p]
+                        board[0+p] = 0
+                    }
+                    if(board[8+p]==0){
+                        board[8+p] = board[4+p]
+                        board[4+p] = board[0+p]
+                        board[0+p] = 0
+                    }
+                    if(board[4+p] ==0){
+                        board[4+p] = board[0+p]
+                        board[0+p] = 0
+                    }
+                    
+                }
+            }
+        }
+        else if (e.keyCode == '37') {
+            // left arrow
+            for(let r= 0;r<1;r++){
+                for(let p =0;p<4;p++){
+                    if(board[0+p*4]===board[1+p*4]){
+                        board[0+p*4] += board[1+p*4]
+                        board[1+p*4] = board[2+p*4]
+                        board[2+p*4] = board[3+p*4]
+                        board[3+p*4] = 0
+                    }
+                    if(board[1+p*4]===board[2+p*4]){
+                        board[1+p*4] += board[2+p*4]
+                        board[2+p*4] = board[3+p*4]
+                        board[3+p*4] = 0
+                    }
+                    if(board[2+p*4]===board[3+p*4]){
+                        board[2+p*4] += board[3+p*4]
+                        board[3+p*4] = 0
+                    }
+                    if(board[0+p*4]==0){
+                        board[0+p*4] = board[1+p*4]
+                        board[1+p*4] = board[2+p*4]
+                        board[2+p*4] = board[3+p*4]
+                        board[3+p*4] = 0
+                    }
+                    if(board[1+p*4]==0){
+                        board[1+p*4] = board[2+p*4]
+                        board[2+p*4] = board[3+p*4]
+                        board[3+p*4] = 0
+                    }
+                    if(board[2+p*4] ==0){
+                        board[2+p*4] = board[3+p*4]
+                        board[3+p*4] = 0
+                    }
+                    
+                }
+
+            }
+        }
+        else if (e.keyCode == '39') {
+            // right arrow
+            for(let r= 0;r<1;r++){
+                for(let p =0;p<4;p++){
+                    if(board[3+p*4]===board[2+p*4]){
+                        board[3+p*4] += board[2+p*4]
+                        board[2+p*4] = board[1+p*4]
+                        board[1+p*4] = board[0+p*4]
+                        board[0+p*4] = 0
+                    }
+                    if(board[2+p*4]===board[1+p*4]){
+                        board[2+p*4] += board[1+p*4]
+                        board[1+p*4] = board[0+p*4]
+                        board[0+p*4] = 0
+                    }
+                    if(board[1+p*4]===board[0+p*4]){
+                        board[1+p*4] += board[0+p*4]
+                        board[0+p*4] = 0
+                    }
+                    if(board[3+p*4]==0){
+                        board[3+p*4] = board[2+p*4]
+                        board[2+p*4] = board[1+p*4]
+                        board[1+p*4] = board[0+p*4]
+                        board[0+p*4] = 0
+                    }
+                    if(board[2+p*4]==0){
+                        board[2+p*4] = board[1+p*4]
+                        board[1+p*4] = board[0+p*4]
+                        board[0+p*4] = 0
+                    }
+                    if(board[1+p*4] ==0){
+                        board[1+p*4] = board[0+p*4]
+                        board[0+p*4] = 0
+                    }
+                    
+                }
+
+            }
+        }
+        let n =0;
+        let vacentCells = []
+        for(let p=0;p<16;p++){
+            if(board[p]==0){
+                n++;
+                vacentCells.push(p)
+            }
+        }
+        //board[vacentCells[Math.floor(Math.random() * n)]] = 2;
+        reload()
+    };
+
+}
+
 
 document.getElementById("restart").addEventListener("click", start );
 start();
