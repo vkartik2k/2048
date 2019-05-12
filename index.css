@@ -29,6 +29,27 @@ body, html{
     flex-direction : column;
 }
 
+#overlay{
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.726);
+    z-index: 2;
+    cursor: pointer;
+    padding-top: 200px;
+    font-size: 40px;
+    color: white;
+    font-weight: 500;
+    padding-bottom: 20px;
+}
+#gameOverNotify{
+    font-size: 18px;
+}
 .boardRow{
     display: flex;
     width: 100%;
@@ -107,38 +128,49 @@ body, html{
 
 .value2{
     background-color: honeydew;
+    transition: 0.2s;
 }
 .value4{
     background-color: hsl(146, 64%, 42%);
-    animation-duration: 3s;
-    animation-name: slidein;
+    /* animation-duration: 3s;
+    animation-name: slidein; */
+    transition: 0.2s;
 }
 .value8{
     background-color: rgba(126, 252, 0, 0.808);
+    transition: 0.2s;
 }
 .value16{
     background-color: rgba(52, 152, 219, 0.801);
+    transition: 0.2s;
 }
 .value32{
     background-color: rgba(255, 166, 0, 0.801);
+    transition: 0.2s;
 }
 .value64{
     background-color: rgba(48, 48, 48, 0.808);
+    transition: 0.2s;
 }
 .value128{
     background-color: rgba(83, 224, 189, 0.801);
+    transition: 0.2s;
 }
 .value256{
     background-color: rgba(18, 136, 165, 0.808);
+    transition: 0.2s;
 }
 .value512{
     background-color: rgba(244, 199, 36, 0.795);
+    transition: 0.2s;
 }
 .value1024{
     background-color: rgba(255, 99, 71, 0.808);
+    transition: 0.2s;
 }
 .value2048{
     background-color: rgba(0, 128, 128, 0.808);
+    transition: 0.2s;
 }
 
 

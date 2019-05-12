@@ -20,11 +20,14 @@ function init() {
     else{
         board[random2] = 2
     }
+    currentScore = 0
+    updateScore()
     for(let i=0;i<16;i++){
         displayBoard.push(document.getElementById("boardElement"+i))
     }
 }
 function reload(){
+    updateScore()
     for(let i=0;i<16;i++){
         if(board[i] != 0){
             displayBoard[i].innerHTML = board[i]
@@ -35,195 +38,326 @@ function reload(){
             displayBoard[i].className = "boardCol"
         }
     }
+    gameOver()
+}
+
+function gameOver(){
+    let gameOverVal = true
+    for(let i=0;i<4;i++){
+        for(let j=0;j<4;j++){
+            if(board[(i*4)+j]===0){
+                gameOverVal = false
+            }
+            else if(j<3 && board[i*4+j]===board[i*4+j-1]){
+                gameOverVal = false
+            }
+            else if(i<3 && board[i*4+j]===board[i*4+j-4]){
+                gameOverVal = false
+            }
+        }
+    }
+    if(gameOverVal===true){
+        document.getElementById("overlay").style.display = "block"
+        document.getElementById("overlay").addEventListener("click", start)
+    }
+}
+function updateScore(){
+    document.getElementById("currentScoreVal").innerHTML = currentScore
+    if(highScore<currentScore){
+        highScore = currentScore
+    }
+    document.getElementById("highScoreVal").innerHTML = highScore
 }
 
 function upKey() {
-    for(let r= 0;r<1;r++){
-        for(let p =0;p<4;p++){
-            if(board[0+p]===board[4+p]){
-                board[0+p] += board[4+p]
-                board[4+p] = board[8+p]
-                board[8+p] = board[12+p]
-                board[12+p] = 0
+    for(let i=0;i<4;i++){
+        //Merging all like
+        if(board[0+i]===board[4+i] && board[0+i]!=0){
+            board[0+i] += board[4+i]
+            currentScore += board[0+i]
+            if(board[8+i]===board[12+i]){
+                board[4+i] = board[8+i]+board[12+i]
+                currentScore += board[4+i]
+                board[8+i] = 0
+                board[12+i] = 0
             }
-            if(board[4+p]===board[8+p]){
-                board[4+p] += board[8+p]
-                board[8+p] = board[12+p]
-                board[12+p] = 0
+            else{
+                board[4+i] = board[8+i]
+                board[8+i] = board[12+i]
+                board[12+i] = 0
             }
-            if(board[8+p]===board[12+p]){
-                board[8+p] += board[12+p]
-                board[12+p] = 0
-            }
-            if(board[8+p] ==0){
-                board[8+p] = board[12+p]
-                board[12+p] = 0
-            }
-            if(board[4+p]==0){
-                board[4+p] = board[8+p]
-                board[8+p] = board[12+p]
-                board[12+p] = 0
-            }
-            if(board[0+p]==0){
-                board[0+p] = board[4+p]
-                board[4+p] = board[8+p]
-                board[8+p] = board[12+p]
-                board[12+p] = 0
-            }
-            if(board[4+p]==0){
-                board[4+p] = board[8+p]
-                board[8+p] = board[12+p]
-                board[12+p] = 0
-            }
-            if(board[8+p] ==0){
-                board[8+p] = board[12+p]
-                board[12+p] = 0
-            }
-            
         }
-    } 
+        else if(board[0+i]===board[8+i] && board[0+i]!=0 && board[4+i]===0){
+            board[0+i] += board[8+i]
+            currentScore += board[0+i]
+            board[4+i] = board[12+i]
+            board[8+i] = 0
+            board[12+i] = 0
+        }
+        else if(board[0+i]===board[12+i] && board[0+i]!=0 && board[4+i]===0 && board[8+i]===0){
+            board[0+i] += board[12+i]
+            currentScore += board[0+i]
+            board[4+i] = 0
+            board[8+i] = 0
+            board[12+i] = 0
+        }
+        else if(board[4+i]===board[8+i] && board[4+i]!=0){
+            board[4+i] += board[8+i]
+            currentScore += board[4+i]
+            board[8+i] = board[12+i]
+            board[12+i] = 0
+        }
+        else if(board[4+i]===board[12+i] && board[4+i]!=0 && board[8+i]===0){
+            board[4+i] += board[12+i]
+            currentScore += board[4+i]
+            board[8+i] = 0
+            board[12+i] = 0
+        }
+        else if(board[8+i]===board[12+i] && board[8+i]!=0){
+            board[8+i] += board[12+i]
+            currentScore += board[8+i]
+            board[12+i] = 0
+        }
+        //Removing Zero and shifting
+        for(let j=0;j<3;j++){
+            if(board[i+0]==0){
+                board[i+0] = board[i+4]
+                board[i+4] = board[i+8]
+                board[i+8] = board[i+12]
+                board[i+12] = 0
+            }
+            if(board[i+4]==0){
+                board[i+4] = board[i+8]
+                board[i+8] = board[i+12]
+                board[i+12] = 0
+            }
+            if(board[i+8]==0){
+                board[i+8] = board[i+12]
+                board[i+12] = 0
+            }
+        }
+        
+        
+
+    }
 }
 
 function downKey(){
-    for(let p =0;p<4;p++){
-        if(board[12+p]===board[8+p]){
-            board[12+p] += board[8+p]
-            board[8+p] = board[4+p]
-            board[4+p] = board[0+p]
-            board[0+p] = 0
+    for(let i=0;i<4;i++){
+        //Merging all like
+        if(board[12+i]===board[8+i] && board[12+i]!=0){
+            board[12+i] += board[8+i]
+            currentScore += board[12+i]
+            if(board[4+i]===board[0+i]){
+                board[8+i] = board[4+i]+board[0+i]
+                currentScore += board[8+i]
+                board[4+i] = 0
+                board[0+i] = 0
+            }
+            else{
+                board[8+i] = board[4+i]
+                board[4+i] = board[0+i]
+                board[0+i] = 0
+            }
         }
-        if(board[8+p]===board[4+p]){
-            board[8+p] += board[4+p]
-            board[4+p] = board[0+p]
-            board[0+p] = 0
+        else if(board[12+i]===board[4+i] && board[12+i]!=0 && board[8+i]===0){
+            board[12+i] += board[4+i]
+            currentScore += board[12+i]
+            board[8+i] = board[0+i]
+            board[4+i] = 0
+            board[0+i] = 0
         }
-        if(board[4+p]===board[0+p]){
-            board[4+p] += board[0+p]
-            board[0+p] = 0
+        else if(board[12+i]===board[0+i] && board[12+i]!=0 && board[8+i]===0 && board[4+i]===0){
+            board[12+i] += board[0+i]
+            currentScore += board[12+i]
+            board[4+i] = 0
+            board[8+i] = 0
+            board[0+i] = 0
         }
-        if(board[4+p] ==0){
-            board[4+p] = board[0+p]
-            board[0+p] = 0
+        else if(board[8+i]===board[4+i] && board[8+i]!=0){
+            board[8+i] += board[4+i]
+            currentScore += board[8+i]
+            board[4+i] = board[0+i]
+            board[0+i] = 0
         }
-        if(board[8+p]==0){
-            board[8+p] = board[4+p]
-            board[4+p] = board[0+p]
-            board[0+p] = 0
+        else if(board[8+i]===board[0+i] && board[8+i]!=0 && board[4+i]===0){
+            board[8+i] += board[0+i]
+            currentScore += board[8+i]
+            board[4+i] = 0
+            board[0+i] = 0
         }
-        if(board[12+p]==0){
-            board[12+p] = board[8+p]
-            board[8+p] = board[4+p]
-            board[4+p] = board[0+p]
-            board[0+p] = 0
+        else if(board[4+i]===board[0+i] && board[4+i]!=0){
+            board[4+i] += board[0+i]
+            currentScore += board[4+i]
+            board[0+i] = 0
         }
-        if(board[8+p]==0){
-            board[8+p] = board[4+p]
-            board[4+p] = board[0+p]
-            board[0+p] = 0
-        }
-        if(board[4+p] ==0){
-            board[4+p] = board[0+p]
-            board[0+p] = 0
+        //Removing Zero and shifting
+        for(let j=0;j<3;j++){
+            if(board[i+12]==0){
+                board[i+12] = board[i+8]
+                board[i+8] = board[i+4]
+                board[i+4] = board[i+0]
+                board[i+0] = 0
+            }
+            if(board[i+8]==0){
+                board[i+8] = board[i+4]
+                board[i+4] = board[i+0]
+                board[i+0] = 0
+            }
+            if(board[i+4]==0){
+                board[i+4] = board[i+0]
+                board[i+0] = 0
+            }
         }
         
+        
+
     }
 
 }
 
 function leftKey(){
-    for(let r= 0;r<1;r++){
-        for(let p =0;p<4;p++){
-            if(board[0+p*4]===board[1+p*4]){
-                board[0+p*4] += board[1+p*4]
-                board[1+p*4] = board[2+p*4]
-                board[2+p*4] = board[3+p*4]
-                board[3+p*4] = 0
+    for(let i=0;i<4;i++){
+        //Merging all like
+        if(board[0+i*4]===board[1+i*4] && board[0+i*4]!=0){
+            board[0+i*4] += board[1+i*4]
+            currentScore += board[0+i*4]
+            if(board[2+i*4]===board[3+i*4]){
+                board[1+i*4] = board[2+i*4]+board[3+i*4]
+                currentScore += board[1+i*4]
+                board[2+i*4] = 0
+                board[3+i*4] = 0
             }
-            if(board[1+p*4]===board[2+p*4]){
-                board[1+p*4] += board[2+p*4]
-                board[2+p*4] = board[3+p*4]
-                board[3+p*4] = 0
+            else{
+                board[1+i*4] = board[2+i*4]
+                board[2+i*4] = board[3+i*4]
+                board[3+i*4] = 0
             }
-            if(board[2+p*4]===board[3+p*4]){
-                board[2+p*4] += board[3+p*4]
-                board[3+p*4] = 0
-            }
-            if(board[2+p*4] ==0){
-                board[2+p*4] = board[3+p*4]
-                board[3+p*4] = 0
-            }
-            if(board[1+p*4]==0){
-                board[1+p*4] = board[2+p*4]
-                board[2+p*4] = board[3+p*4]
-                board[3+p*4] = 0
-            }
-            if(board[0+p*4]==0){
-                board[0+p*4] = board[1+p*4]
-                board[1+p*4] = board[2+p*4]
-                board[2+p*4] = board[3+p*4]
-                board[3+p*4] = 0
-            }
-            if(board[1+p*4]==0){
-                board[1+p*4] = board[2+p*4]
-                board[2+p*4] = board[3+p*4]
-                board[3+p*4] = 0
-            }
-            if(board[2+p*4] ==0){
-                board[2+p*4] = board[3+p*4]
-                board[3+p*4] = 0
-            }
-            
         }
+        else if(board[0+i*4]===board[2+i*4] && board[0+i*4]!=0 && board[1+i*4]===0){
+            board[0+i*4] += board[2+i*4]
+            currentScore += board[0+i*4]
+            board[1+i*4] = board[3+i*4]
+            board[2+i*4] = 0
+            board[3+i*4] = 0
+        }
+        else if(board[0+i*4]===board[3+i*4] && board[0+i*4]!=0 && board[1+i*4]===0 && board[2+i*4]===0){
+            board[0+i*4] += board[3+i*4]
+            currentScore += board[0+i*4]
+            board[1+i*4] = 0
+            board[2+i*4] = 0
+            board[3+i*4] = 0
+        }
+        else if(board[1+i*4]===board[2+i*4] && board[1+i*4]!=0){
+            board[1+i*4] += board[2+i*4]
+            currentScore += board[1+i*4]
+            board[2+i*4] = board[3+i*4]
+            board[3+i*4] = 0
+        }
+        else if(board[1+i*4]===board[3+i*4] && board[1+i*4]!=0 && board[2+i*4]===0){
+            board[1+i*4] += board[3+i*4]
+            currentScore += board[1+i*4]
+            board[2+i*4] = 0
+            board[3+i*4] = 0
+        }
+        else if(board[2+i*4]===board[3+i*4] && board[2+i*4]!=0){
+            board[2+i*4] += board[3+i*4]
+            currentScore += board[2+i*4]
+            board[3+i*4] = 0
+        }
+        //Removing Zero and shifting
+        for(let j=0;j<3;j++){
+            if(board[i*4+0]==0){
+                board[i*4+0] = board[i*4+1]
+                board[i*4+1] = board[i*4+2]
+                board[i*4+2] = board[i*4+3]
+                board[i*4+3] = 0
+            }
+            if(board[i*4+1]==0){
+                board[i*4+1] = board[i*4+2]
+                board[i*4+2] = board[i*4+3]
+                board[i*4+3] = 0
+            }
+            if(board[i*4+2]==0){
+                board[i*4+2] = board[i*4+3]
+                board[i*4+3] = 0
+            }
+        }
+        
+        
 
     }
-
-
 }
 
 function rightKey(){
-    for(let r= 0;r<1;r++){
-        for(let p =0;p<4;p++){
-            if(board[3+p*4]===board[2+p*4]){
-                board[3+p*4] += board[2+p*4]
-                board[2+p*4] = board[1+p*4]
-                board[1+p*4] = board[0+p*4]
-                board[0+p*4] = 0
+    for(let i=0;i<4;i++){
+        //Merging all like
+        if(board[3+i*4]===board[2+i*4] && board[3+i*4]!=0){
+            board[3+i*4] += board[2+i*4]
+            currentScore += board[3+i*4]
+            if(board[1+i*4]===board[0+i*4]){
+                board[2+i*4] = board[1+i*4]+board[0+i*4]
+                currentScore += board[2+i*4]
+                board[1+i*4] = 0
+                board[0+i*4] = 0
             }
-            if(board[2+p*4]===board[1+p*4]){
-                board[2+p*4] += board[1+p*4]
-                board[1+p*4] = board[0+p*4]
-                board[0+p*4] = 0
+            else{
+                board[2+i*4] = board[1+i*4]
+                board[1+i*4] = board[0+i*4]
+                board[0+i*4] = 0
             }
-            if(board[1+p*4]===board[0+p*4]){
-                board[1+p*4] += board[0+p*4]
-                board[0+p*4] = 0
-            }
-            if(board[1+p*4] ==0){
-                board[1+p*4] = board[0+p*4]
-                board[0+p*4] = 0
-            }
-            if(board[2+p*4]==0){
-                board[2+p*4] = board[1+p*4]
-                board[1+p*4] = board[0+p*4]
-                board[0+p*4] = 0
-            }
-            if(board[3+p*4]==0){
-                board[3+p*4] = board[2+p*4]
-                board[2+p*4] = board[1+p*4]
-                board[1+p*4] = board[0+p*4]
-                board[0+p*4] = 0
-            }
-            if(board[2+p*4]==0){
-                board[2+p*4] = board[1+p*4]
-                board[1+p*4] = board[0+p*4]
-                board[0+p*4] = 0
-            }
-            if(board[1+p*4] ==0){
-                board[1+p*4] = board[0+p*4]
-                board[0+p*4] = 0
-            }
-            
         }
+        else if(board[3+i*4]===board[1+i*4] && board[3+i*4]!=0 && board[2+i*4]===0){
+            board[3+i*4] += board[1+i*4]
+            currentScore += board[3+i*4]
+            board[2+i*4] = board[0+i*4]
+            board[1+i*4] = 0
+            board[0+i*4] = 0
+        }
+        else if(board[3+i*4]===board[0+i*4] && board[3+i*4]!=0 && board[2+i*4]===0 && board[1+i*4]===0){
+            board[3+i*4] += board[0+i*4]
+            currentScore += board[3+i*4]
+            board[1+i*4] = 0
+            board[2+i*4] = 0
+            board[0+i*4] = 0
+        }
+        else if(board[2+i*4]===board[1+i*4] && board[1+i*4]!=0){
+            board[2+i*4] += board[1+i*4]
+            currentScore += board[2+i*4]
+            board[1+i*4] = board[0+i*4]
+            board[0+i*4] = 0
+        }
+        else if(board[2+i*4]===board[0+i*4] && board[2+i*4]!=0 && board[1+i*4]===0){
+            board[2+i*4] += board[0+i*4]
+            currentScore += board[2+i*4]
+            board[1+i*4] = 0
+            board[0+i*4] = 0
+        }
+        else if(board[1+i*4]===board[0+i*4] && board[1+i*4]!=0){
+            board[1+i*4] += board[0+i*4]
+            currentScore += board[1+i*4]
+            board[0+i*4] = 0
+        }
+        //Removing Zero and shifting
+        for(let j=0;j<3;j++){
+            if(board[i*4+3]==0){
+                board[i*4+3] = board[i*4+2]
+                board[i*4+2] = board[i*4+1]
+                board[i*4+1] = board[i*4+0]
+                board[i*4+0] = 0
+            }
+            if(board[i*4+2]==0){
+                board[i*4+2] = board[i*4+1]
+                board[i*4+1] = board[i*4+0]
+                board[i*4+0] = 0
+            }
+            if(board[i*4+1]==0){
+                board[i*4+1] = board[i*4+0]
+                board[i*4+0] = 0
+            }
+        }
+        
+        
 
     }
 
@@ -232,6 +366,7 @@ function rightKey(){
 function start(){
     init()
     reload()
+    document.getElementById("overlay").style.display = "none"
     document.onkeydown = function(e){
         if (e.keyCode == '38') {
             upKey()
