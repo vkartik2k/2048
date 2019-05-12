@@ -100,13 +100,13 @@ body, html{
         padding-bottom: 17px;
     }
     .score{
-        margin-top:30px;
-        margin-bottom:30px;
+        margin-top:15px;
+        margin-bottom:15px;
     }
 }
 
 .value2{
-    background-color: aqua;
+    background-color: sandybrown;
 }
 .value4{
     background-color: hotpink;
