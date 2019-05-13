@@ -49,10 +49,10 @@ function gameOver(){
             if(board[(i*4)+j]===0){
                 gameOverVal = false
             }
-            else if(j<3 && board[i*4+j]===board[i*4+j-1]){
+            else if(j<3 && board[i*4+j]===board[i*4+j+1]){
                 gameOverVal = false
             }
-            else if(i<3 && board[i*4+j]===board[i*4+j-4]){
+            else if(i<3 && board[i*4+j]===board[i*4+j+4]){
                 gameOverVal = false
             }
         }
@@ -445,6 +445,12 @@ function start(){
         /* reset values */
         xDown = null
         yDown = null
+        let changed = false;
+        for(let i=0;i<16;i++){
+            if(board[i]!=prevBoard[i]){
+                changed = true;
+            }
+        }
         if(changed){
             let n =0;
             let vacentCells = []
