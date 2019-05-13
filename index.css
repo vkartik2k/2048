@@ -124,7 +124,7 @@ body, html{
 /* ----------------------------------------------------- */
 
 .value2{
-    background-color: honeydew;
+    background-color: rgb(209, 255, 209);
     transition: 0.2s;
 }
 .value4{
