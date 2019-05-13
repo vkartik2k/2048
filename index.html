@@ -13,46 +13,48 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
 </head>
-<body>
-    <div id="container">
-        <div id="header">
-            2048
-        </div>
-        <div id="scoreBoard">
-            <span id="currentScore" class="score"><span class="scoreTitle">Current Score</span><br><span id="currentScoreVal">0</span></span>
-            <span id="highScore" class="score"><span class="scoreTitle">High Score</span><br><span id="highScoreVal">0</span></span>
-        </div>
-        <div id="board">
-            <div id="overlay">
-                GAME OVER<br>
-                <span id="gameOverNotify">Click anywhere to restart!</span>
+<body class="body">
+    <div class="wrapper">
+            <div id="container">
+                <div id="header">
+                    2048
+                </div>
+                <div id="scoreBoard">
+                    <span id="currentScore" class="score"><span class="scoreTitle">Current Score</span><br><span id="currentScoreVal">0</span></span>
+                    <span id="highScore" class="score"><span class="scoreTitle">High Score</span><br><span id="highScoreVal">0</span></span>
+                </div>
+                <div id="board">
+                    <div id="overlay">
+                        GAME OVER<br>
+                        <span id="gameOverNotify">Click anywhere to restart!</span>
+                    </div>
+                    <div class="boardRow">
+                        <div class="boardCol" id="boardElement0"></div>
+                        <div class="boardCol" id="boardElement1"></div>
+                        <div class="boardCol" id="boardElement2"></div>
+                        <div class="boardCol" id="boardElement3"></div>
+                    </div>
+                    <div class="boardRow">
+                        <div class="boardCol" id="boardElement4"></div>
+                        <div class="boardCol" id="boardElement5"></div>
+                        <div class="boardCol" id="boardElement6"></div>
+                        <div class="boardCol" id="boardElement7"></div>
+                    </div>
+                    <div class="boardRow">
+                        <div class="boardCol" id="boardElement8"></div>
+                        <div class="boardCol" id="boardElement9"></div>
+                        <div class="boardCol" id="boardElement10"></div>
+                        <div class="boardCol" id="boardElement11"></div>
+                    </div>
+                    <div class="boardRow">
+                        <div class="boardCol" id="boardElement12"></div>
+                        <div class="boardCol" id="boardElement13"></div>
+                        <div class="boardCol" id="boardElement14"></div>
+                        <div class="boardCol" id="boardElement15"></div>
+                    </div>
+                </div>
+                <button id="restart">RESTART ↻</button>
             </div>
-            <div class="boardRow">
-                <div class="boardCol" id="boardElement0"></div>
-                <div class="boardCol" id="boardElement1"></div>
-                <div class="boardCol" id="boardElement2"></div>
-                <div class="boardCol" id="boardElement3"></div>
-            </div>
-            <div class="boardRow">
-                <div class="boardCol" id="boardElement4"></div>
-                <div class="boardCol" id="boardElement5"></div>
-                <div class="boardCol" id="boardElement6"></div>
-                <div class="boardCol" id="boardElement7"></div>
-            </div>
-            <div class="boardRow">
-                <div class="boardCol" id="boardElement8"></div>
-                <div class="boardCol" id="boardElement9"></div>
-                <div class="boardCol" id="boardElement10"></div>
-                <div class="boardCol" id="boardElement11"></div>
-            </div>
-            <div class="boardRow">
-                <div class="boardCol" id="boardElement12"></div>
-                <div class="boardCol" id="boardElement13"></div>
-                <div class="boardCol" id="boardElement14"></div>
-                <div class="boardCol" id="boardElement15"></div>
-            </div>
-        </div>
-        <button id="restart">RESTART ↻</button>
     </div>
     
     <!-- JS FILES -->
