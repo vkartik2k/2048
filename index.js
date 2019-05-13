@@ -283,9 +283,6 @@ function leftKey(){
                 board[i*4+3] = 0
             }
         }
-        
-        
-
     }
 }
 
@@ -356,11 +353,7 @@ function rightKey(){
                 board[i*4+0] = 0
             }
         }
-        
-        
-
     }
-
 }
 
 function start(){
@@ -368,6 +361,10 @@ function start(){
     reload()
     document.getElementById("overlay").style.display = "none"
     document.onkeydown = function(e){
+        let prevBoard = []
+        for(let i=0;i<16;i++){
+            prevBoard.push(board[i])
+        }
         if (e.keyCode == '38') {
             upKey()
         }
@@ -380,15 +377,29 @@ function start(){
         else if (e.keyCode == '39') {
             rightKey()
         }
-        let n =0;
-        let vacentCells = []
-        for(let p=0;p<16;p++){
-            if(board[p]==0){
-                n++
-                vacentCells.push(p)
+        let changed = false;
+        for(let i=0;i<16;i++){
+            if(board[i]!=prevBoard[i]){
+                changed = true;
             }
         }
-        board[vacentCells[Math.floor(Math.random() * n)]] = 2
+        if(changed){
+            let n =0;
+            let vacentCells = []
+            for(let p=0;p<16;p++){
+                if(board[p]==0){
+                    n++
+                    vacentCells.push(p)
+                }
+            }
+            if(Math.floor(Math.random() * 100) >= 5){
+                board[vacentCells[Math.floor(Math.random() * n)]] = 2
+            }
+            else{
+                board[vacentCells[Math.floor(Math.random() * n)]] = 4
+            }
+
+        }
         reload()
     }
     document.addEventListener('touchstart', handleTouchStart, false)  
@@ -419,6 +430,11 @@ function start(){
         var xDiff = xDown - xUp;
         var yDiff = yDown - yUp;
 
+        let prevBoard = []
+        for(let i=0;i<16;i++){
+            prevBoard.push(board[i])
+        }
+
         if ( Math.abs( xDiff ) > Math.abs( yDiff ) ) {/*most significant*/
             if ( xDiff > 0 ) { 
                 leftKey()
@@ -435,15 +451,22 @@ function start(){
         /* reset values */
         xDown = null
         yDown = null
-        let n =0
-        let vacentCells = []
-        for(let p=0;p<16;p++){
-            if(board[p]==0){
-                n++
-                vacentCells.push(p)
+        if(changed){
+            let n =0;
+            let vacentCells = []
+            for(let p=0;p<16;p++){
+                if(board[p]==0){
+                    n++
+                    vacentCells.push(p)
+                }
+            }
+            if(Math.floor(Math.random() * 100) >= 5){
+                board[vacentCells[Math.floor(Math.random() * n)]] = 2
+            }
+            else{
+                board[vacentCells[Math.floor(Math.random() * n)]] = 4
             }
         }
-        board[vacentCells[Math.floor(Math.random() * n)]] = 2
         reload()                                          
     }
 }
