@@ -22,6 +22,7 @@ function init() {
     }
     currentScore = 0
     updateScore()
+    displayBoard = []
     for(let i=0;i<16;i++){
         displayBoard.push(document.getElementById("boardElement"+i))
     }
@@ -136,9 +137,6 @@ function upKey() {
                 board[i+12] = 0
             }
         }
-        
-        
-
     }
 }
 
@@ -209,11 +207,7 @@ function downKey(){
                 board[i+0] = 0
             }
         }
-        
-        
-
     }
-
 }
 
 function leftKey(){
