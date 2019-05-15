@@ -354,6 +354,8 @@ function start(){
     init()
     reload()
     document.getElementById("overlay").style.display = "none"
+}
+function initialController(){
     document.onkeydown = function(e){
         let prevBoard = []
         for(let i=0;i<16;i++){
@@ -473,3 +475,4 @@ function start(){
 
 document.getElementById("restart").addEventListener("click", start)
 start()
+initialController()
